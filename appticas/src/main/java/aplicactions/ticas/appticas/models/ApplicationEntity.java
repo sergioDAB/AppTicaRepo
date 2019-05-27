@@ -1,30 +1,13 @@
 package aplicactions.ticas.appticas.models;
 
 
-import javax.persistence.*;
-
-@Entity
-@Table(name="app")
-@Access(AccessType.FIELD)
 public class ApplicationEntity {
 
-    @Id
-    @Column(name="id_app",nullable = true)
     private Integer idApp;// serial not null,
-
-    @Column(name="nombre",nullable = false, length = 20)
     private String nombre;// varchar(20) not null,
-
-    @Column(name="categoria",nullable = false)
     private Integer categoria;// int not null,
-
-    @Column(name="desarrollador",nullable = false)
     private Integer desarrollador;// int not null,
-
-    @Column(name="descripcion",nullable = true, length = 100)
     private String descripcion;// varchar (100),
-
-    @Column(name="imagen",nullable = true)
     private String imagen;// BYTEA,
 
     public Integer getIdApp() {
@@ -83,6 +66,7 @@ public class ApplicationEntity {
         this.descripcion = descripcion;
         this.imagen = imagen;
     }
+
 
     @Override
     public String toString() {

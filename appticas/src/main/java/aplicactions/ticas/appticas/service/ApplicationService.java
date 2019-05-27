@@ -1,9 +1,29 @@
 package aplicactions.ticas.appticas.service;
 
+import aplicactions.ticas.appticas.dao.ApplicationRepository;
 import aplicactions.ticas.appticas.models.ApplicationEntity;
+import aplicactions.ticas.appticas.utils.Response;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class ApplicationService {
+
+    @Autowired
+    protected ApplicationRepository applicationRepository;
 
 
-public interface ApplicationService {
+    public Response saveApplication(ApplicationEntity app) {
 
-    ApplicationEntity save(ApplicationEntity app);
+        return this.applicationRepository.saveApplications(app);
+    }
+
+    public List<ApplicationEntity> getAllApplications() {
+
+        return this.applicationRepository.getAllApps();
+    }
 }
