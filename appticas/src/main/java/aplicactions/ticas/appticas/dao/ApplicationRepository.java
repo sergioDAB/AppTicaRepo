@@ -26,7 +26,7 @@ public class ApplicationRepository  {
 
     }
     //cada metodo retorna una lista de objetos con los records de la base de datos.
-    public List<ApplicationEntity> getAllApps() throws SQLException {
+    public static List<ApplicationEntity> getAllApps() throws SQLException {
         ApplicationRepository a = new ApplicationRepository();
 
         List<ApplicationEntity> apps= new ArrayList<ApplicationEntity>();
@@ -38,6 +38,7 @@ public class ApplicationRepository  {
         try {
             Statement st = (Statement) con.createStatement();
             ResultSet r = st.executeQuery(sSQL);
+
             while(r.next()){
                 ApplicationEntity app = new ApplicationEntity(
                         Integer.parseInt(r.getString(1)),
@@ -56,33 +57,168 @@ public class ApplicationRepository  {
         return apps;
     }
 
+    public static List<ApplicationEntity> getAppById(String id) throws SQLException {
+        ApplicationRepository a = new ApplicationRepository();
+
+        List<ApplicationEntity> apps= new ArrayList<ApplicationEntity>();
+
+        Connection con = a.conectar();
+
+        String sSQL = "select * from app where id_app = "+id+";";
+
+        try {
+            Statement st = (Statement) con.createStatement();
+            ResultSet r = st.executeQuery(sSQL);
+
+            while(r.next()){
+                ApplicationEntity app = new ApplicationEntity(
+                        Integer.parseInt(r.getString(1)),
+                        r.getString(2),
+                        Integer.parseInt(r.getString(3)),
+                        Integer.parseInt(r.getString(4)),
+                        r.getString(5),
+                        "vacio");
+                apps.add(app);
+            }
+        } catch (SQLException e){
+            System.out.println(e.toString());
+        }
+
+
+        return apps;
+    }
+
+
+
+    public static List<ApplicationEntity> getAppByDev(String id) throws SQLException {
+        ApplicationRepository a = new ApplicationRepository();
+
+        List<ApplicationEntity> apps= new ArrayList<ApplicationEntity>();
+
+        Connection con = a.conectar();
+
+        String sSQL = "select * from app where desarrollador = "+id+";";
+
+        try {
+            Statement st = (Statement) con.createStatement();
+            ResultSet r = st.executeQuery(sSQL);
+
+            while(r.next()){
+                ApplicationEntity app = new ApplicationEntity(
+                        Integer.parseInt(r.getString(1)),
+                        r.getString(2),
+                        Integer.parseInt(r.getString(3)),
+                        Integer.parseInt(r.getString(4)),
+                        r.getString(5),
+                        "vacio");
+                apps.add(app);
+            }
+        } catch (SQLException e){
+            System.out.println(e.toString());
+        }
+
+
+        return apps;
+    }
+
+    public static List<ApplicationEntity> getAppByCategory(String id) throws SQLException {
+        ApplicationRepository a = new ApplicationRepository();
+
+        List<ApplicationEntity> apps= new ArrayList<ApplicationEntity>();
+
+        Connection con = a.conectar();
+
+        String sSQL = "select * from app where categoria = "+id+";";
+
+        try {
+            Statement st = (Statement) con.createStatement();
+            ResultSet r = st.executeQuery(sSQL);
+
+            while(r.next()){
+                ApplicationEntity app = new ApplicationEntity(
+                        Integer.parseInt(r.getString(1)),
+                        r.getString(2),
+                        Integer.parseInt(r.getString(3)),
+                        Integer.parseInt(r.getString(4)),
+                        r.getString(5),
+                        "vacio");
+                apps.add(app);
+            }
+        } catch (SQLException e){
+            System.out.println(e.toString());
+        }
+
+
+        return apps;
+    }
+
+    //insert into calificacion (puntacion,id_usu,id_app) values (4,1,1);
+
+    public static String AppCalification(String puntos,String id_app,String id_usuario) throws SQLException {
+        try{
+            if(Integer.parseInt(puntos)> 5 || Integer.parseInt(puntos)<1){
+                return "puntuacion invalida";
+            }
+            int i= Integer.parseInt(id_app)+Integer.parseInt(id_usuario);
+
+            ApplicationRepository a = new ApplicationRepository();
+            Connection con = a.conectar();
+
+            String sSQL = "insert into calificacion (puntacion,id_usu,id_app) values ("+puntos+","+id_usuario+","+id_app+");";
+
+            try {
+                Statement st = (Statement) con.createStatement();
+                ResultSet r = st.executeQuery(sSQL);
+                return "02000";
+
+            } catch (SQLException e){
+                return e.getSQLState();
+            }
+        }catch (Exception e){
+            return "error de tipos de datos";
+        }
+
+    }
+
     public Response saveApplications(ApplicationEntity app){
 
         // insert in the data base the new app
         return  new Response(200,"success");
     }
 
-    public static void main (String[] args) throws SQLException {
-        ApplicationRepository a = new ApplicationRepository();
 
+    public static void main (String[] args) throws SQLException {
+        String puntos = "7";
+        String id_usuario="1";
+        String id_app="1";
+
+        if(Integer.parseInt(puntos)> 5 && Integer.parseInt(puntos)<1){
+            System.out.println("puntuacion invalida");
+            return;
+        }
+        ApplicationRepository a = new ApplicationRepository();
         Connection con = a.conectar();
 
-        String sSQL = "select * from app";
+        String sSQL = "insert into calificacion (puntacion,id_usu,id_app) values ("+puntos+","+id_usuario+","+id_app+");";
+        try{
 
-        try {
-            Statement st = (Statement) con.createStatement();
-            ResultSet r = st.executeQuery(sSQL);
-            while(r.next()){
-                System.out.println (r.getString(1));
-                System.out.println (r.getString(2));
-                System.out.println (r.getString(3));
-                System.out.println (r.getString(4));
-                System.out.println (r.getString(5));}
-        } catch (SQLException e){
+
+            try {
+                Statement st = (Statement) con.createStatement();
+                st.executeQuery(sSQL);
+                System.out.println("insercion exitosa");
+                return;
+
+            } catch (SQLException e){
                 System.out.println(e.toString());
+                return;
             }
-
+        }catch (Exception e){
+            System.out.println(e.toString());
+            return;
+        }
     }
+
 
 
 
