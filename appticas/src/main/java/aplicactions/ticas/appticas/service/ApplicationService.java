@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Service
@@ -22,7 +23,7 @@ public class ApplicationService {
         return this.applicationRepository.saveApplications(app);
     }
 
-    public List<ApplicationEntity> getAllApplications() {
+    public List<ApplicationEntity> getAllApplications() throws SQLException {
 
         return this.applicationRepository.getAllApps();
     }

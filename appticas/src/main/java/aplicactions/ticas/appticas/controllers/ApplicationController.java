@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -24,7 +25,7 @@ public class ApplicationController {
     protected ObjectMapper objectMapper;
 
     @RequestMapping(value="/apps")
-    public List<ApplicationEntity> getApplications(){
+    public List<ApplicationEntity> getApplications() throws SQLException {
         Response response = new Response(200,"success");
 
         List<ApplicationEntity> apps= this.applicationService.getAllApplications();

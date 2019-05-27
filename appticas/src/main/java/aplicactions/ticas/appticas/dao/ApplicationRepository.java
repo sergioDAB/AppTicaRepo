@@ -26,13 +26,32 @@ public class ApplicationRepository  {
 
     }
     //cada metodo retorna una lista de objetos con los records de la base de datos.
-    public List<ApplicationEntity> getAllApps(){
+    public List<ApplicationEntity> getAllApps() throws SQLException {
+        ApplicationRepository a = new ApplicationRepository();
 
         List<ApplicationEntity> apps= new ArrayList<ApplicationEntity>();
 
-        for(int i=0; i < 2; i++){
-            apps.add(new ApplicationEntity(1,"UBEEr", 1,1,"viajes","imagen.png"));
+        Connection con = a.conectar();
+
+        String sSQL = "select * from app";
+
+        try {
+            Statement st = (Statement) con.createStatement();
+            ResultSet r = st.executeQuery(sSQL);
+            while(r.next()){
+                ApplicationEntity app = new ApplicationEntity(
+                        Integer.parseInt(r.getString(1)),
+                        r.getString(2),
+                        Integer.parseInt(r.getString(3)),
+                        Integer.parseInt(r.getString(4)),
+                        r.getString(5),
+                        "vacio");
+                apps.add(app);
+                }
+        } catch (SQLException e){
+            System.out.println(e.toString());
         }
+
 
         return apps;
     }
@@ -56,7 +75,9 @@ public class ApplicationRepository  {
             while(r.next()){
                 System.out.println (r.getString(1));
                 System.out.println (r.getString(2));
-                System.out.println (r.getString(3));}
+                System.out.println (r.getString(3));
+                System.out.println (r.getString(4));
+                System.out.println (r.getString(5));}
         } catch (SQLException e){
                 System.out.println(e.toString());
             }
