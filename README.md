@@ -1,0 +1,2 @@
+# AppTicaRepo
+proyecto spring boot 
