@@ -9,6 +9,17 @@ public class ApplicationEntity {
     private Integer desarrollador;// int not null,
     private String descripcion;// varchar (100),
     private String imagen;// BYTEA,
+    private Integer stars;
+
+    public ApplicationEntity(Integer idApp, String nombre, Integer categoria, Integer desarrollador, String descripcion, String imagen, Integer stars) {
+        this.idApp = idApp;
+        this.nombre = nombre;
+        this.categoria = categoria;
+        this.desarrollador = desarrollador;
+        this.descripcion = descripcion;
+        this.imagen = imagen;
+        this.stars = stars;
+    }
 
     public Integer getIdApp() {
         return idApp;
@@ -58,26 +69,12 @@ public class ApplicationEntity {
         this.imagen = imagen;
     }
 
-    public ApplicationEntity(Integer idApp, String nombre, Integer categoria, Integer desarrollador, String descripcion, String imagen) {
-        this.idApp = idApp;
-        this.nombre = nombre;
-        this.categoria = categoria;
-        this.desarrollador = desarrollador;
-        this.descripcion = descripcion;
-        this.imagen = imagen;
+    public Integer getStars() {
+        return stars;
     }
 
-
-    @Override
-    public String toString() {
-        return "ApplicationEntity{" +
-                "idApp=" + idApp +
-                ", nombre='" + nombre + '\'' +
-                ", categoria=" + categoria +
-                ", desarrollador=" + desarrollador +
-                ", descripcion='" + descripcion + '\'' +
-                ", imagen='" + imagen + '\'' +
-                '}';
+    public void setStars(Integer stars) {
+        this.stars = stars;
     }
 }
 

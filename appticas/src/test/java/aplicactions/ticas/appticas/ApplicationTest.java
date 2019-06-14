@@ -26,10 +26,12 @@ public class ApplicationTest {
     @Test
     public void getAllAppsTest1() throws SQLException {
         String resultado = ApplicationRepository.getAllApps().toString();
-        ApplicationEntity app = new ApplicationEntity(1,"UBER",1,1,"vehicular","vacio");
+
+
+
+        ApplicationEntity app = new ApplicationEntity(1,"UBER",1,1,"vehicular","vacio",0);
         List<ApplicationEntity> esperado = new ArrayList<ApplicationEntity>();
         esperado.add(app);
-
         assertEquals(resultado,esperado.toString());
 
     }
@@ -56,7 +58,7 @@ public class ApplicationTest {
     @Test
     public void getAppByIdTest1() throws SQLException {
         String resultado = ApplicationRepository.getAppById("1").toString();
-        ApplicationEntity app = new ApplicationEntity(1,"UBER",1,1,"vehicular","vacio");
+        ApplicationEntity app = new ApplicationEntity(1,"UBER",1,1,"vehicular","vacio",0);
         List<ApplicationEntity> esperado = new ArrayList<ApplicationEntity>();
         esperado.add(app);
 
@@ -82,11 +84,11 @@ public class ApplicationTest {
 
     @Test
     public void getAppByIdTest3() throws SQLException {
-        String resultado = ApplicationRepository.getAppById("a").toString();
+        String resultado = ApplicationRepository.getAppById("1").toString();
         List<ApplicationEntity> esperado = new ArrayList<ApplicationEntity>();
 
         assertEquals(resultado,esperado.toString());
-    }
+}
 
     /*06
     ingresa un espacio vacio "" en el id
@@ -110,7 +112,7 @@ public class ApplicationTest {
     @Test
     public void getAppByDeveloper1() throws SQLException {
         String resultado = ApplicationRepository.getAppByDev("1").toString();
-        ApplicationEntity app = new ApplicationEntity(1,"UBER",1,1,"vehicular","vacio");
+        ApplicationEntity app = new ApplicationEntity(1,"UBER",1,1,"vehicular","vacio",0);
         List<ApplicationEntity> esperado = new ArrayList<ApplicationEntity>();
         esperado.add(app);
 
@@ -160,7 +162,7 @@ public class ApplicationTest {
     @Test
     public void getAppByCategory1() throws SQLException {
         String resultado = ApplicationRepository.getAppByCategory("1").toString();
-        ApplicationEntity app = new ApplicationEntity(1,"UBER",1,1,"vehicular","vacio");
+        ApplicationEntity app = new ApplicationEntity(1,"UBER",1,1,"vehicular","vacio",0);
         List<ApplicationEntity> esperado = new ArrayList<ApplicationEntity>();
         esperado.add(app);
 
@@ -223,7 +225,7 @@ public class ApplicationTest {
     }
 
     /*17
- 
+
      * */
     @Test
     public void appCalificationTest3() throws SQLException {
@@ -247,7 +249,7 @@ public class ApplicationTest {
      * */
     @Test
     public void appCalificationTest5() throws SQLException {
-        String resultado = ApplicationRepository.AppCalification("6","1","0");
+        String resultado = ApplicationRepository.AppCalification("6","1","1");
         String esperado = "puntuacion invalida";
         assertEquals(esperado,resultado);
     }
@@ -257,7 +259,7 @@ public class ApplicationTest {
      * */
     @Test
     public void appCalificationTest6() throws SQLException {
-        String resultado = ApplicationRepository.AppCalification("n","1","0");
+        String resultado = ApplicationRepository.AppCalification("n","1","1");
         String esperado = "error de tipos de datos";
         assertEquals(esperado,resultado);
     }

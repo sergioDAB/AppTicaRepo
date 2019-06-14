@@ -33,7 +33,8 @@ public class ApplicationRepository  {
 
         Connection con = a.conectar();
 
-        String sSQL = "select * from app";
+        //String sSQL = "select * from app where id_app = "+id+";";
+        String sSQL = "select A.*, C.s/C.p as calificacion from app A inner join (select sum(puntacion) as s,count(puntacion) as p, id_app  from calificacion group by id_app) as C on A.id_app = C.id_app;";
 
         try {
             Statement st = (Statement) con.createStatement();
@@ -46,7 +47,8 @@ public class ApplicationRepository  {
                         Integer.parseInt(r.getString(3)),
                         Integer.parseInt(r.getString(4)),
                         r.getString(5),
-                        "vacio");
+                        "vacio",
+                        Integer.parseInt(r.getString(7)));
                 apps.add(app);
                 }
         } catch (SQLException e){
@@ -64,7 +66,8 @@ public class ApplicationRepository  {
 
         Connection con = a.conectar();
 
-        String sSQL = "select * from app where id_app = "+id+";";
+        //String sSQL = "select * from app where id_app = "+id+";";
+        String sSQL = "select A.*,C.id_app, C.s/C.p as calificacion from app A inner join (select sum(puntacion) as s,count(puntacion) as p, id_app  from calificacion group by id_app) as C on A.id_app = C.id_app where A.id_app = "+id+";";
 
         try {
             Statement st = (Statement) con.createStatement();
@@ -77,7 +80,8 @@ public class ApplicationRepository  {
                         Integer.parseInt(r.getString(3)),
                         Integer.parseInt(r.getString(4)),
                         r.getString(5),
-                        "vacio");
+                        "vacio",
+                        Integer.parseInt(r.getString(7)));
                 apps.add(app);
             }
         } catch (SQLException e){
@@ -110,7 +114,8 @@ public class ApplicationRepository  {
                         Integer.parseInt(r.getString(3)),
                         Integer.parseInt(r.getString(4)),
                         r.getString(5),
-                        "vacio");
+                        "vacio",
+                        Integer.parseInt(r.getString(7)));
                 apps.add(app);
             }
         } catch (SQLException e){
@@ -141,7 +146,8 @@ public class ApplicationRepository  {
                         Integer.parseInt(r.getString(3)),
                         Integer.parseInt(r.getString(4)),
                         r.getString(5),
-                        "vacio");
+                        "vacio",
+                        Integer.parseInt(r.getString(6)));
                 apps.add(app);
             }
         } catch (SQLException e){
@@ -185,41 +191,6 @@ public class ApplicationRepository  {
         // insert in the data base the new app
         return  new Response(200,"success");
     }
-
-
-    public static void main (String[] args) throws SQLException {
-        String puntos = "7";
-        String id_usuario="1";
-        String id_app="1";
-
-        if(Integer.parseInt(puntos)> 5 && Integer.parseInt(puntos)<1){
-            System.out.println("puntuacion invalida");
-            return;
-        }
-        ApplicationRepository a = new ApplicationRepository();
-        Connection con = a.conectar();
-
-        String sSQL = "insert into calificacion (puntacion,id_usu,id_app) values ("+puntos+","+id_usuario+","+id_app+");";
-        try{
-
-
-            try {
-                Statement st = (Statement) con.createStatement();
-                st.executeQuery(sSQL);
-                System.out.println("insercion exitosa");
-                return;
-
-            } catch (SQLException e){
-                System.out.println(e.toString());
-                return;
-            }
-        }catch (Exception e){
-            System.out.println(e.toString());
-            return;
-        }
-    }
-
-
 
 
 }

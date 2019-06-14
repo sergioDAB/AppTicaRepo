@@ -1,15 +1,20 @@
 package aplicactions.ticas.appticas.utils;
 
 public class Response {
-    private Integer responseCode;
+    private Object body;
     private String message;
 
-    public Integer getResponseCode() {
-        return responseCode;
+    public Response(Object body, String message) {
+        this.body = body;
+        this.message = message;
     }
 
-    public void setResponseCode(Integer responseCode) {
-        this.responseCode = responseCode;
+    public Object getBody() {
+        return body;
+    }
+
+    public void setBody(Object body) {
+        this.body = body;
     }
 
     public String getMessage() {
@@ -17,11 +22,6 @@ public class Response {
     }
 
     public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public Response(Integer responseCode, String message) {
-        this.responseCode = responseCode;
         this.message = message;
     }
 }
