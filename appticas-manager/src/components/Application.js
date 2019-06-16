@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import store from "./store.js";
+import '../css/Application.css';
 
 
 class Application extends Component {
@@ -23,12 +24,11 @@ class Application extends Component {
 
     render() {
         return (
-            <div>
-                <label>{this.props.id}</label>
-                <label>{this.props.nombre}</label>
-                <label>{this.props.stars}</label>
-
-            </div>
+            <tr>
+                <th className="rowlabel">{this.props.id}</th>
+                <th className="rowlabel">{this.props.nombre}</th>
+                <th className="rowlabel">{this.props.stars}</th>
+            </tr>
         );
     }
 }

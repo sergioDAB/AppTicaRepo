@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Application from './Application';
 import Appuser from './Appuser';
 import store from "./store.js";
+import '../css/Application.css';
 
 
 class Applications extends Component {
@@ -16,6 +17,9 @@ class Applications extends Component {
         };
 
         this.renderRows=this.renderRows.bind(this);
+        this.getApps = this.getApps.bind(this);
+
+        this.getApps();
 
         store.subscribe(()=>{
             this.setState({
@@ -70,9 +74,15 @@ class Applications extends Component {
     render(){
     return(
         <div>
-            <label> Applications</label>
-            <button onClick={this.getApps}>get apps</button>
+            <h2> Applications</h2>
             <table>
+                <thead>
+                <tr className="tabHeader">
+                    <th> Id app</th>
+                    <th> nombre</th>
+                    <th> estrellas</th>
+                </tr>
+                </thead>
                 <tbody>
                 {this.renderRows(this.state.appRows)}
                 </tbody>

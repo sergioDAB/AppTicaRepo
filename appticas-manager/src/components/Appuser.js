@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import store from "./store.js";
 
+import '../css/Application.css';
+
 
 class Appuser extends Component {
 
@@ -70,17 +72,17 @@ class Appuser extends Component {
 
     render() {
         return (
-            <div>
-                <label>{this.props.id}</label>
-                <label>{this.props.nombre}</label>
-                <label>{this.props.stars}</label>
+            <tr>
+                <th className="rowlabel">{this.props.id}</th>
+                <th className="rowlabel">{this.props.nombre}</th>
+                <th className="rowlabel">{this.props.stars}</th>
                 <button onClick={this.set1}> 1 </button>
                 <button onClick={this.set2}> 2 </button>
                 <button onClick={this.set3}> 3 </button>
                 <button onClick={this.set4}> 4 </button>
                 <button onClick={this.set5}> 5 </button>
 
-            </div>
+            </tr>
         );
     }
 }
