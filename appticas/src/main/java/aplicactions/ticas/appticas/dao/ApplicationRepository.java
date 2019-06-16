@@ -34,22 +34,36 @@ public class ApplicationRepository  {
         Connection con = a.conectar();
 
         //String sSQL = "select * from app where id_app = "+id+";";
-        String sSQL = "select A.*, C.s/C.p as calificacion from app A inner join (select sum(puntacion) as s,count(puntacion) as p, id_app  from calificacion group by id_app) as C on A.id_app = C.id_app;";
+        String sSQL = "select A.*, C.s/C.p as calificacion from app A left join (select sum(puntacion) as s,count(puntacion) as p, id_app  from calificacion group by id_app) as C on A.id_app = C.id_app;";
 
         try {
             Statement st = (Statement) con.createStatement();
             ResultSet r = st.executeQuery(sSQL);
 
             while(r.next()){
-                ApplicationEntity app = new ApplicationEntity(
-                        Integer.parseInt(r.getString(1)),
-                        r.getString(2),
-                        Integer.parseInt(r.getString(3)),
-                        Integer.parseInt(r.getString(4)),
-                        r.getString(5),
-                        "vacio",
-                        Integer.parseInt(r.getString(7)));
-                apps.add(app);
+                if(r.getString(7)== null){
+                    System.out.println(r.getString(7));
+                    ApplicationEntity app = new ApplicationEntity(
+                            Integer.parseInt(r.getString(1)),
+                            r.getString(2),
+                            Integer.parseInt(r.getString(3)),
+                            Integer.parseInt(r.getString(4)),
+                            r.getString(5),
+                            "vacio",
+                            0);
+                    apps.add(app);
+                }else{
+                    ApplicationEntity app = new ApplicationEntity(
+                            Integer.parseInt(r.getString(1)),
+                            r.getString(2),
+                            Integer.parseInt(r.getString(3)),
+                            Integer.parseInt(r.getString(4)),
+                            r.getString(5),
+                            "vacio",
+                            Integer.parseInt(r.getString(7)));
+                    apps.add(app);
+                }
+
                 }
         } catch (SQLException e){
             System.out.println(e.toString());

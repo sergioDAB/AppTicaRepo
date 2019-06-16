@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Application from './Application';
+import Appuser from './Appuser';
 import store from "./store.js";
 
 
@@ -9,7 +10,8 @@ class Applications extends Component {
         this.state= {
             view: "apps",
             user: "user",
-            appRows: [{"idApp":1,"nombre":"ap1", "stars":1},{"idApp":2,"nombre":"ap2", "stars":2}]
+            appRows: [{"idApp":1,"nombre":"ap1", "stars":1}],
+            typeUser: store.getState().typeUser
 
         };
 
@@ -19,15 +21,23 @@ class Applications extends Component {
             this.setState({
                 view: store.getState().view,
                 user: store.getState().user,
-                appRows:store.getState().appRows
+                appRows:store.getState().appRows,
+                typeUser:store.getState().typeUser
             });
         });
     }
 
     putApp(id,nombre,stars){
-        return(
-            <Application id = {id} nombre = {nombre} stars = {stars} key = {id}/>
-        )
+        if(store.getState().typeUser === "1"){
+            return(
+                <Appuser id = {id} nombre = {nombre} stars = {stars} key = {id}/>
+            )
+        }else{
+            return(
+                <Application id = {id} nombre = {nombre} stars = {stars} key = {id}/>
+            )
+        }
+
     }
 
     getApps(){

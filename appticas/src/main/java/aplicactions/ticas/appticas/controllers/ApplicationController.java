@@ -33,6 +33,18 @@ public class ApplicationController {
         return  response;
     }
 
+    @RequestMapping(value="/calificate")
+    @CrossOrigin(origins = "*")
+    public Response setCalification(@RequestParam("points") String puntos,@RequestParam("app")String id_app,@RequestParam("user") String id_usu) throws SQLException, JSONException {
+
+        String status= this.applicationService.setCalification(puntos,id_app,id_usu);
+        if(status != "02000"){
+            return new Response("error","success");
+        }
+        return new Response("200","success");
+
+    }
+
     @RequestMapping(value = "/saveUpdate", method= RequestMethod.POST)
     public Response saveUpdate(@RequestBody String json) throws IOException {
         this.objectMapper = new ObjectMapper();

@@ -4,15 +4,16 @@ public class UserEntity {
     private Integer id;
     private String user;
     private String password;
-    private String name;
     private String userType;
 
-    public UserEntity(Integer id, String user, String password, String name, String userType) {
+    public UserEntity(Integer id, String user, String password, String userType) {
         this.id = id;
         this.user = user;
         this.password = password;
-        this.name = name;
         this.userType = userType;
+    }
+
+    public UserEntity() {
     }
 
     public Integer getId() {
@@ -37,14 +38,6 @@ public class UserEntity {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getUserType() {
