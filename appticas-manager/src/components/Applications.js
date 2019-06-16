@@ -73,21 +73,26 @@ class Applications extends Component {
 
     render(){
     return(
-        <div>
-            <h2> Applications</h2>
-            <table>
-                <thead>
-                <tr className="tabHeader">
-                    <th> Id app</th>
-                    <th> nombre</th>
-                    <th> estrellas</th>
-                </tr>
-                </thead>
-                <tbody>
-                {this.renderRows(this.state.appRows)}
-                </tbody>
-            </table>
+        <div className="myBackground">
+            <div className="containerApplications">
+                <h2> Applications</h2>
+                <table>
+                    <thead>
+                    <tr className="tabHeader">
+                        <th className="textValue">Imagen</th>
+                        <th className="textValue"> Identificador</th>
+                        <th className="textValue"> nombre</th>
+                        <th className="textValue"> estrellas</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {this.renderRows(this.state.appRows)}
+                    </tbody>
+                </table>
+                <button className="acceptButton" onClick={this.getApps}>Refrescar</button>
+            </div>
         </div>
+
 
         );
     }

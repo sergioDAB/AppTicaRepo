@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import store from "./store.js";
+import imagen from '../images/icono.jpg';
 
 import '../css/Application.css';
 
@@ -73,9 +74,10 @@ class Appuser extends Component {
     render() {
         return (
             <tr>
-                <th className="rowlabel">{this.props.id}</th>
-                <th className="rowlabel">{this.props.nombre}</th>
-                <th className="rowlabel">{this.props.stars}</th>
+                <img className="imagen" src={imagen}/>
+                <th className="textValue">{this.props.id}</th>
+                <th className="textValue">{this.props.nombre}</th>
+                <th className="textValue">{this.props.stars}</th>
                 <button onClick={this.set1}> 1 </button>
                 <button onClick={this.set2}> 2 </button>
                 <button onClick={this.set3}> 3 </button>

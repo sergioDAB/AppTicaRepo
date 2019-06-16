@@ -62,11 +62,21 @@ class  Login extends Component {
 
     render(){
         return (
-            <div>
-                <label> Ingrese sus credenciales</label>
-                <input placeholder="user name" ref={this.user}/>
-                <input placeholder="password" type="password" ref={this.password}/>
-                <button onClick={this.validateUser}> Go my apps</button>
+            <div className="myBackground">
+                <div className="loginContainer">
+                    <label className="labelRow"> Ingrese sus credenciales</label>
+                    <div>
+                        <input placeholder="user name" ref={this.user} className="inputRow"/>
+                    </div>
+                    <div>
+                        <input placeholder="password" type="password" ref={this.password} className="inputRow"/>
+                    </div>
+                    <div>
+                        <button onClick={this.validateUser} className="acceptButton"> Check </button>
+                    </div>
+                </div>
+
+
             </div>
         );
     }

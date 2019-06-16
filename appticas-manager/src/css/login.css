@@ -1,0 +1,28 @@
+.loginContainer{
+    background-color: darkslategrey;
+    text-align: center;
+    margin-top: 10%;
+    padding-top: 5%;
+    align-content: center;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+.inputRow{
+    font-family: Calibri;
+    font-size: large;
+    margin-top: 2%;
+    border: none;
+    color: darkslategrey;
+    border-radius: 5%;
+    text-align: center;
+
+}
+
+.labelRow{
+    font-family: Calibri;
+    font-family: "Arial Black";
+    color: aliceblue;
+    font-size: large;
+    margin-top: 10%;
+}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import store from "./store.js";
-import '../css/Application.css';
+import imagen from "../images/icono.jpg";
 
 
 class Application extends Component {
@@ -25,6 +25,7 @@ class Application extends Component {
     render() {
         return (
             <tr>
+                <img className="imagen" src={imagen}/>
                 <th className="rowlabel">{this.props.id}</th>
                 <th className="rowlabel">{this.props.nombre}</th>
                 <th className="rowlabel">{this.props.stars}</th>

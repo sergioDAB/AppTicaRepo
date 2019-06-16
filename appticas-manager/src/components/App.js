@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import logo from '../images/logo.svg';
+
+
 import '../css/App.css';
+import '../css/login.css';
 import  store from "./store.js";
 
 import Login from "./Login.js";
@@ -33,7 +35,7 @@ class  App extends Component {
         <div className="App">
           <header className="App-header">
             Welcome to Applications Ticas
-            <button  onClick={this.changeView}>Go Login</button>
+            <button  onClick={this.changeView} className="acceptButton">Go to Applications</button>
           </header>
         </div>
     );
